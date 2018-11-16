@@ -18,10 +18,12 @@ dbserver:
 
   # mysqlのイメージを取得 （ローカルにないので、DockerHubから最新版を取得）
   image: mysql
-
+  command: '--default-authentication-plugin=mysql_native_password'
   # データのマウント先を指定 （さっき作ったdataonlyコンテナ）
   volumes_from:
    - dataonly
+  volumes:
+   - ./init:/docker-entrypoint-initdb.d
 
   # 環境変数
   environment:
